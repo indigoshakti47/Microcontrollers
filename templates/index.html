@@ -316,34 +316,7 @@
         var msg_t = '';
         var socket = io.connect('http://' + document.domain + ':' + location.port);
         var dyn_functions = [];
-        socket.on('message', function (msg) {
-            var list = msg.split("-");
-            console.log(list);
-            var counter = 0;
-            list.forEach(element => {
-                if (counter == 9) {
-                    if (element == "0") {
-                        clearTimeout(typingTimer);
-                        msg_t = 'all ok';
-                        typingTimer = setTimeout(doneTyping, doneTypingInterval, element, msg_t);
-                        flag = true;
-                    } else {
-                        clearTimeout(typingTimer);
-                        if (flag == true) {
-                            msg_t = 'enfriando!';
-                            dyn_functions['receive_void_' + counter](element, msg_t);
-                            flag = false;
-                        }
-                    }
-                } else {
-                    dyn_functions['receive_void_' + counter](element);
-                }
-                counter += 1;
-            });
-        });
-        function doneTyping(element, msg_t) {
-            dyn_functions['receive_void_6'](element, msg_t);
-        }
+        
         $("#sendButton").click(function () {
             var message = $("#myInput").val();
             socket.emit("message", message);
