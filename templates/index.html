@@ -23,7 +23,12 @@
 </head>
 <body>
 <div>
-    <p>Juego de aros</p>
+  <h1>
+    Juego de aros
+  </h1>
+  <p>
+    Punto <spa class="cant-bottle">0</spa>
+  </p>
 </div>
 
 <div class="container">
@@ -305,6 +310,7 @@
 
       <script type="text/javascript" charset="utf-8">
 
+      cantBottle = 0
       function sensor(id) {
 
         bottle = document.createElement('img')
@@ -331,11 +337,20 @@
         }
       })
 
+      function point(points){
+        $('.cant-bottle').text(points)
+      }
+
       function sensorOn(id) {
+        cantBottle++
+        point(cantBottle)
         $(id).addClass('sensor-on')
       }
 
       function sensorOff(id) {
+        cantBottle--
+        point(cantBottle)
+        console.log(cantBottle)
         $(id).removeClass('sensor-on')
       }
 
