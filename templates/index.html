@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/app.css">
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
     integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -30,7 +31,7 @@
   <div class="row">
 
     <!--SENSOR 1 -->
-    <div class="col-sm">
+    <!-- <div class="col-sm">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -56,10 +57,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!--SENSOR 2 -->
-      <div class="col-sm">
+      <!-- <div class="col-sm">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -85,10 +86,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
       <!--SENSOR 3 -->
-      <div class="col-sm">
+      <!-- <div class="col-sm">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -114,13 +115,13 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
 
       <div class="row">
           <!--SENSOR 4 -->
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -146,10 +147,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!--SENSOR 5 -->
-            <div class="col-sm">
+            <!-- <div class="col-sm">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -175,10 +176,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
           <!--SENSOR 6 -->
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -205,12 +206,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
 
       <div class="row">
           <!--SENSOR 7 -->
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -236,10 +237,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
           <!--SENSOR 8 -->
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -265,10 +266,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
 
           <!--SENSOR 9 -->
-          <div class="col-sm">
+          <!-- <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -294,144 +295,183 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
+          <div id="game" class="row"></div>
         </div>
       </div>
 
       <script type="text/javascript" charset="utf-8">
 
-      const socket = io();
-      socket.on('connect', function() {
-        socket.emit('message', {data: 'I\'m connected!'});
-      });
+      function sensor(id) {
 
-      $('#textoApagando').hide();
-      var typingTimer;
-      var doneTypingInterval = 300;
-      var flag = true;
-      var msg_t = '';
-      var socket = io.connect('http://' + document.domain + ':' + location.port);
-      var dyn_functions = [];
+        bottle = document.createElement('img')
+        $(bottle).attr('src', 'static/images/bottle.png')
+        $(bottle).addClass('bottle')
 
-      $("#sendButton").click(function () {
-        var message = $("#myInput").val();
-        socket.emit("message", message);
-        $("#myInput").val("");
-      });
+        ring = document.createElement('img')
+        $(ring).attr('src', 'static/images/ring.png')
+        $(ring).addClass('ring')
 
-      <!--SENSOR 1 -->
-      dyn_functions['receive_void_1'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo1').text("Encestó el aro");
-          $('#estadoInfrarojo1').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo1').text("No aro");
-          $('#estadoInfrarojo1').removeClass('alert-success').addClass("alert-danger");
+        display = document.createElement('div')
+        $(display).addClass('col-sm-2')
+        $(display).addClass('sensor')
+        $(display).attr('id',id)
+        $(display).append(bottle)
+        $(display).append(ring)
+
+        return display
+      }
+
+      $(document).ready(function(){
+        for(let x = 0; x < 100; x++){
+          $('#game').append(sensor(`sensor-${x}`))
         }
+      })
+
+      function sensorOn(id) {
+        $(id).addClass('sensor-on')
       }
 
-      <!--SENSOR 2 -->
-      dyn_functions['receive_void_2'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo2').text("Encestó el aro");
-          $('#estadoInfrarojo2').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo2').text("No aro");
-          $('#estadoInfrarojo2').removeClass('alert-success').addClass("alert-danger");
-        }
+      function sensorOff(id) {
+        $(id).removeClass('sensor-on')
       }
 
-      <!--SENSOR 3 -->
-      dyn_functions['receive_void_3'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo3').text("Encestó el aro");
-          $('#estadoInfrarojo3').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo3').text("No aro");
-          $('#estadoInfrarojo3').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
+      setTimeout(function(){
+        sensorOn('#sensor-3')
+      }, 1000)
 
-      <!--SENSOR 4 -->
-      dyn_functions['receive_void_4'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo4').text("Encestó el aro");
-          $('#estadoInfrarojo4').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo4').text("No aro");
-          $('#estadoInfrarojo4').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-      <!--SENSOR 5 -->
-      dyn_functions['receive_void_5'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo5').text("Encestó el aro");
-          $('#estadoInfrarojo5').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo5').text("No aro");
-          $('#estadoInfrarojo5').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-      <!--SENSOR 6 -->
-      dyn_functions['receive_void_6'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo6').text("Encestó el aro");
-          $('#estadoInfrarojo6').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo6').text("No aro");
-          $('#estadoInfrarojo6').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-      <!--SENSOR 7 -->
-      dyn_functions['receive_void_7'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo7').text("Encestó el aro");
-          $('#estadoInfrarojo7').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo7').text("No aro");
-          $('#estadoInfrarojo7').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-      <!--SENSOR 8 -->
-      dyn_functions['receive_void_8'] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo8').text("Encestó el aro");
-          $('#estadoInfrarojo8').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo8').text("No aro");
-          $('#estadoInfrarojo8').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-      <!--SENSOR 9 -->
-      dyn_functions['receive_void_9 '] = function (val) {
-        if (val == "0") {
-          $('#estadoInfrarojo9').text("Encestó el aro");
-          $('#estadoInfrarojo9').removeClass('alert-danger').addClass("alert-success");
-        } else {
-          $('#estadoInfrarojo9').text("No aro");
-          $('#estadoInfrarojo9').removeClass('alert-success').addClass("alert-danger");
-        }
-      }
-
-
-      function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-      }
-      async function asyncCall() {
-        var count = 10;
-        for (let i = 0; i < 11; i++) {
-          $('#textoApagar').text('Reiniciando juego en ' + count + ' segundos');
-          console.log(count);
-          count -= 1;
-          await sleep(10000);
-        }
-      }
+      // const socket = io();
+      // socket.on('connect', function() {
+      //   socket.emit('message', {data: 'I\'m connected!'});
+      // });
+      //
+      // $('#textoApagando').hide();
+      // var typingTimer;
+      // var doneTypingInterval = 300;
+      // var flag = true;
+      // var msg_t = '';
+      // var socket = io.connect('http://' + document.domain + ':' + location.port);
+      // var dyn_functions = [];
+      //
+      // $("#sendButton").click(function () {
+      //   var message = $("#myInput").val();
+      //   socket.emit("message", message);
+      //   $("#myInput").val("");
+      // });
+      //
+      // // SENSOR 1
+      // dyn_functions['receive_void_1'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo1').text("Encestó el aro");
+      //     $('#estadoInfrarojo1').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo1').text("No aro");
+      //     $('#estadoInfrarojo1').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 2
+      // dyn_functions['receive_void_2'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo2').text("Encestó el aro");
+      //     $('#estadoInfrarojo2').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo2').text("No aro");
+      //     $('#estadoInfrarojo2').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 3
+      // dyn_functions['receive_void_3'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo3').text("Encestó el aro");
+      //     $('#estadoInfrarojo3').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo3').text("No aro");
+      //     $('#estadoInfrarojo3').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 4
+      // dyn_functions['receive_void_4'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo4').text("Encestó el aro");
+      //     $('#estadoInfrarojo4').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo4').text("No aro");
+      //     $('#estadoInfrarojo4').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 5
+      // dyn_functions['receive_void_5'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo5').text("Encestó el aro");
+      //     $('#estadoInfrarojo5').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo5').text("No aro");
+      //     $('#estadoInfrarojo5').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 6
+      // dyn_functions['receive_void_6'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo6').text("Encestó el aro");
+      //     $('#estadoInfrarojo6').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo6').text("No aro");
+      //     $('#estadoInfrarojo6').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 7
+      // dyn_functions['receive_void_7'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo7').text("Encestó el aro");
+      //     $('#estadoInfrarojo7').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo7').text("No aro");
+      //     $('#estadoInfrarojo7').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 8
+      // dyn_functions['receive_void_8'] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo8').text("Encestó el aro");
+      //     $('#estadoInfrarojo8').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo8').text("No aro");
+      //     $('#estadoInfrarojo8').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      // // SENSOR 9
+      // dyn_functions['receive_void_9 '] = function (val) {
+      //   if (val == "0") {
+      //     $('#estadoInfrarojo9').text("Encestó el aro");
+      //     $('#estadoInfrarojo9').removeClass('alert-danger').addClass("alert-success");
+      //   } else {
+      //     $('#estadoInfrarojo9').text("No aro");
+      //     $('#estadoInfrarojo9').removeClass('alert-success').addClass("alert-danger");
+      //   }
+      // }
+      //
+      //
+      // function sleep(ms) {
+      //   return new Promise(resolve => setTimeout(resolve, ms));
+      // }
+      // async function asyncCall() {
+      //   var count = 10;
+      //   for (let i = 0; i < 11; i++) {
+      //     $('#textoApagar').text('Reiniciando juego en ' + count + ' segundos');
+      //     console.log(count);
+      //     count -= 1;
+      //     await sleep(10000);
+      //   }
+      // }
     </script>
 
 </body>
