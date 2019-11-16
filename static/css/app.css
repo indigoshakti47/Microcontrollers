@@ -10,10 +10,10 @@ img {
 .sensor .ring {
   position: absolute;
   transition: 1s;
-  top: 0%;
+  top: -20%;
   left: 0%;
   opacity: 0;
-  transform: rotate(30deg);
+  transform: rotate(0deg);
 }
 
 .sensor-on .ring {
