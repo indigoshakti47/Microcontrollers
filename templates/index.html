@@ -27,7 +27,7 @@
     Juego de aros
   </h1>
   <p>
-    Punto <spa class="cant-bottle">0</spa>
+    Puntajes <spa class="score-bottle">0</spa>
   </p>
 </div>
 
@@ -310,7 +310,7 @@
 
       <script type="text/javascript" charset="utf-8">
 
-      cantBottle = 0
+      scoreBottle = 0
       function sensor(id) {
 
         bottle = document.createElement('img')
@@ -338,19 +338,19 @@
       })
 
       function point(points){
-        $('.cant-bottle').text(points)
+        $('.score-bottle').text(points)
       }
 
       function sensorOn(id) {
-        cantBottle++
-        point(cantBottle)
+        scoreBottle++
+        point(scoreBottle)
         $(id).addClass('sensor-on')
       }
 
       function sensorOff(id) {
-        cantBottle--
-        point(cantBottle)
-        console.log(cantBottle)
+        scoreBottle--
+        point(scoreBottle)
+        console.log(scoreBottle)
         $(id).removeClass('sensor-on')
       }
 

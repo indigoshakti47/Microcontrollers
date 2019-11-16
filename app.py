@@ -13,7 +13,7 @@ socketio = SocketIO(app)
 # Ruta por defecto en http://127.0.0.1:5000/
 @app.route("/")
 def hello():
-   return render_template('index.html')
+   return render_template('bottles.html')
 
 # SocketIO: aquí se manejan los mensajes entrantes
 # y salientes del servidor, este es el socket que
