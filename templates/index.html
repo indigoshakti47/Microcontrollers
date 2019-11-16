@@ -297,7 +297,9 @@
               </div>
             </div> -->
           </div>
-          <div id="game" class="row"></div>
+          <div class="col-sm-6 col-md-4 col-lg-4 offset-sm-3 offset-md-4 offset-lg-4">
+            <div id="game" class="row"></div>
+          </div>
         </div>
       </div>
 
@@ -314,7 +316,7 @@
         $(ring).addClass('ring')
 
         display = document.createElement('div')
-        $(display).addClass('col-sm-2')
+        $(display).attr('class', 'col-sm-4 col-md-4 col-lg-4')
         $(display).addClass('sensor')
         $(display).attr('id',id)
         $(display).append(bottle)
@@ -324,7 +326,7 @@
       }
 
       $(document).ready(function(){
-        for(let x = 0; x < 100; x++){
+        for(let x = 0; x < 9; x++){
           $('#game').append(sensor(`sensor-${x}`))
         }
       })
