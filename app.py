@@ -13,15 +13,15 @@ socketio = SocketIO(app)
 # Ruta por defecto en http://127.0.0.1:5000/
 @app.route("/")
 def hello():
-   return render_template('bottles.html')
+   return render_template('index.html')
 
 # SocketIO: aquí se manejan los mensajes entrantes
 # y salientes del servidor, este es el socket que
 # recibe las señales del archivo arduino.py
 start = True
 
-@socketio.on('proximity')
-def handle_proximity(message):
+@socketio.on('message')
+def handle_message(message):
    print('received message: ' + message)
    send(message, broadcast=True)
 

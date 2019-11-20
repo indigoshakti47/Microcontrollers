@@ -36,7 +36,8 @@
   <div class="row">
 
     <!--SENSOR 1 -->
-    <!-- <div class="col-sm">
+
+    <div class="col-sm">
       <div class="card">
         <div class="card-body">
           <div class="row">
@@ -62,10 +63,10 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!--SENSOR 2 -->
-      <!-- <div class="col-sm">
+      <div class="col-sm">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -91,10 +92,10 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
 
       <!--SENSOR 3 -->
-      <!-- <div class="col-sm">
+       <div class="col-sm">
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -120,13 +121,13 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
 
 
       <div class="row">
           <!--SENSOR 4 -->
-          <!-- <div class="col-sm">
+           <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -152,10 +153,10 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
             <!--SENSOR 5 -->
-            <!-- <div class="col-sm">
+            <div class="col-sm">
               <div class="card">
                 <div class="card-body">
                   <div class="row">
@@ -181,10 +182,10 @@
                     </div>
                   </div>
                 </div>
-              </div> -->
+              </div>
 
           <!--SENSOR 6 -->
-          <!-- <div class="col-sm">
+           <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -211,12 +212,12 @@
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
 
       <div class="row">
           <!--SENSOR 7 -->
-          <!-- <div class="col-sm">
+           <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -242,10 +243,10 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
           <!--SENSOR 8 -->
-          <!-- <div class="col-sm">
+           <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -271,10 +272,10 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
 
           <!--SENSOR 9 -->
-          <!-- <div class="col-sm">
+          <div class="col-sm">
             <div class="card">
               <div class="card-body">
                 <div class="row">
@@ -300,7 +301,8 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
+
           </div>
           <div class="col-sm-6 col-md-4 col-lg-4 offset-sm-3 offset-md-4 offset-lg-4">
             <div id="game" class="row"></div>
@@ -310,23 +312,23 @@
 
       <script type="text/javascript" charset="utf-8">
 
-      scoreBottle = 0
+      scoreBottle = 0;
       function sensor(id) {
 
-        bottle = document.createElement('img')
-        $(bottle).attr('src', 'static/images/bottle.png')
-        $(bottle).addClass('bottle')
+        bottle = document.createElement('img');
+        $(bottle).attr('src', 'static/images/bottle.png');
+        $(bottle).addClass('bottle');
 
-        ring = document.createElement('img')
-        $(ring).attr('src', 'static/images/ring.png')
-        $(ring).addClass('ring')
+        ring = document.createElement('img');
+        $(ring).attr('src', 'static/images/ring.png');
+        $(ring).addClass('ring');
 
-        display = document.createElement('div')
-        $(display).attr('class', 'col-sm-4 col-md-4 col-lg-4')
-        $(display).addClass('sensor')
-        $(display).attr('id',id)
-        $(display).append(bottle)
-        $(display).append(ring)
+        display = document.createElement('div');
+        $(display).attr('class', 'col-sm-4 col-md-4 col-lg-4');
+        $(display).addClass('sensor');
+        $(display).attr('id',id);
+        $(display).append(bottle);
+        $(display).append(ring);
 
         return display
       }
@@ -335,28 +337,28 @@
         for(let x = 0; x < 9; x++){
           $('#game').append(sensor(`sensor-${x}`))
         }
-      })
+      });
 
       function point(points){
         $('.score-bottle').text(points)
       }
 
       function sensorOn(id) {
-        scoreBottle++
-        point(scoreBottle)
+        scoreBottle++;
+        point(scoreBottle);
         $(id).addClass('sensor-on')
       }
 
       function sensorOff(id) {
-        scoreBottle--
-        point(scoreBottle)
-        console.log(scoreBottle)
+        scoreBottle--;
+        point(scoreBottle);
+        console.log(scoreBottle);
         $(id).removeClass('sensor-on')
       }
 
       setTimeout(function(){
         sensorOn('#sensor-3')
-      }, 1000)
+      }, 1000);
 
       setTimeout(function(){
         sensorOff('#sensor-3')
@@ -493,6 +495,164 @@
       //     await sleep(10000);
       //   }
       // }
+    </script>
+
+
+<script type="text/javascript" charset="utf-8">
+        $('#infoTemperatura').hide();
+        $('#textoApagando').hide();
+        var typingTimer;
+        var doneTypingInterval = 100;
+        var flag = true;
+        var msg_t = '';
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+        var dyn_functions = [];
+        socket.on('message', function (msg) {
+            var list = msg.split("-");
+            console.log(list);
+            var counter = 0;
+            list.forEach(element => {
+                if (counter == 6) {
+                    if (element == "0") {
+                        clearTimeout(typingTimer);
+                        msg_t = 'all ok';
+                        typingTimer = setTimeout(doneTyping, doneTypingInterval, element, msg_t);
+                        flag = true;
+                    } else {
+                        clearTimeout(typingTimer);
+                        if (flag == true) {
+                            msg_t = 'enfriando!';
+                            dyn_functions['receive_void_' + counter](element, msg_t);
+                            flag = false;
+                        }
+                    }
+
+                } else {
+                    dyn_functions['receive_void_' + counter](element);
+                }
+                counter += 1;
+            });
+        });
+
+        function doneTyping(element, msg_t) {
+            dyn_functions['receive_void_6'](element, msg_t);
+        }
+
+        $("#sendButton").click(function () {
+            var message = $("#myInput").val();
+            socket.emit("message", message);
+            $("#myInput").val("");
+        });
+        dyn_functions['receive_void_0'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo1').text("Sin aro");
+                $('#estadoInfrarojo1').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo1').text("Con Aro");
+                $('#estadoInfrarojo1').removeClass('alert-success').addClass("alert-warning");
+            }
+        };
+        dyn_functions['receive_void_1'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo2').text("Sin aro");
+                $('#estadoInfrarojo2').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo2').text("Con Aro");
+                $('#estadoInfrarojo2').removeClass('alert-success').addClass("alert-warning");
+            }
+
+        };
+        dyn_functions['receive_void_2'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo3').text("Sin Aro");
+                $('#estadoInfrarojo3').removeClass('alert-danger').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo3').text("Con Aro");
+                $('#estadoInfrarojo3').removeClass('alert-success').addClass("alert-danger");
+            }
+        };
+        dyn_functions['receive_void_3'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo4').text("Sin aro");
+                $('#estadoInfrarojo4').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo4').text("Con Aro");
+                $('#estadoInfrarojo4').removeClass('alert-success').addClass("alert-warning");
+            }
+
+        };
+        dyn_functions['receive_void_4'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo5').text("Sin aro");
+                $('#estadoInfrarojo5').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo5').text("Con Aro");
+                $('#estadoInfrarojo5').removeClass('alert-success').addClass("alert-warning");
+            }
+        };
+        dyn_functions['receive_void_5'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo6').text("Sin aro");
+                $('#estadoInfrarojo6').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo6').text("Con Aro");
+                $('#estadoInfrarojo6').removeClass('alert-success').addClass("alert-warning");
+            }
+        };
+
+        dyn_functions['receive_void_6'] = function (val, msg_t) {
+            console.log(msg_t);
+            if (val == "0") {
+                $('#estadoInfrarojo7').text("Sin Aro :)");
+                $('#estadoInfrarojo7').removeClass('alert-warning').addClass("alert-success");
+                $('#infoTemperatura').hide();
+            } else {
+                $('#estadoInfrarojo7').text("Con Aro");
+                $('#estadoInfrarojo7').removeClass('alert-success').addClass("alert-warning");
+                $('#infoTemperatura').show();
+            }
+
+        };
+        dyn_functions['receive_void_7'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo8').text("Luz apagada");
+                $('#estadoInfrarojo8').removeClass('alert-warning').addClass("alert-success");
+                $('#estadoInfrarojo8').hide();
+            } else {
+                $('#estadoInfrarojo8').text("Luz encendida");
+                $('#estadoInfrarojo8').removeClass('alert-success').addClass("alert-warning");
+                $('#textoApagando').show();
+
+                asyncCall();
+            }
+
+
+        };
+
+
+        dyn_functions['receive_void_8'] = function (val) {
+            if (val == "0") {
+                $('#estadoInfrarojo9').text("Sin aro");
+                $('#estadoInfrarojo9').removeClass('alert-warning').addClass("alert-success");
+            } else {
+                $('#estadoInfrarojo9').text("Con Aro");
+                $('#estadoInfrarojo9').removeClass('alert-success').addClass("alert-warning");
+            }
+        };
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+
+        async function asyncCall() {
+            var count = 10;
+            for (let i = 0; i < 11; i++) {
+                $('#textoApagar').text('Apagando en: ' + count + ' segundos');
+                console.log(count);
+                count -= 1;
+                await sleep(1000);
+            }
+        }
     </script>
 
 </body>
