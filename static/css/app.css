@@ -1,6 +1,7 @@
 
 img {
-  max-width: 100%;
+  max-width: 70%;
+
 }
 
 .sensor {
@@ -9,7 +10,7 @@ img {
 
 .sensor .ring {
   position: absolute;
-  transition: 1s;
+  transition: 2s;
   top: -20%;
   left: 0%;
   opacity: 0;
@@ -21,4 +22,41 @@ img {
   opacity: 1;
   left: 12%;
   transform: rotate(30deg);
+}
+
+
+body{
+
+  font-family: 'Press Start 2P', cursive;
+  background-color: rgba(173,32,32,0.7);
+}
+
+
+div{
+
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  height: 90px;
+  color: white;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: 5px;
+  text-shadow: -2px 0 0 #fdff2a,
+    -4px 0 0 #df4a42,
+    2px 0 0 #91fcfe,
+    4px 0 0 #4405fc;
+
+  animation: blink 1s steps(4, start) infinite;
+
+
+ @keyframes blink
+   to
+     visibility: hidden
+
 }
