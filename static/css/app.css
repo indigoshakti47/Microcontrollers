@@ -1,11 +1,11 @@
 
 img {
-  max-width: 70%;
+  max-width: 80%;
 
 }
 
 .sensor {
-  margin-top: 10px;
+  margin-top: 13px;
 }
 
 .sensor .ring {
@@ -18,9 +18,9 @@ img {
 }
 
 .sensor-on .ring {
-  top: 23%;
+  top: 33%;
   opacity: 1;
-  left: 12%;
+  left: 25%;
   transform: rotate(30deg);
 }
 
@@ -52,11 +52,11 @@ div{
     2px 0 0 #91fcfe,
     4px 0 0 #4405fc;
 
-  animation: blink 1s steps(4, start) infinite;
+  animation: blink 2s steps(2, start) infinite;
 
 
- @keyframes blink
+ @keyframes blink:
    to
-     visibility: hidden
+     visibility: hidden;
 
 }

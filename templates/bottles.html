@@ -49,25 +49,27 @@
 
       <script type="text/javascript" charset="utf-8">
 
+       console.log("I KNOW BABES");
 
 
-      scoreBottle = 0
+
+      scoreBottle = 3;
       function sensor(id) {
 
-        bottle = document.createElement('img')
-        $(bottle).attr('src', 'static/images/bottle.png')
-        $(bottle).addClass('bottle')
+        bottle = document.createElement('img');
+        $(bottle).attr('src', 'static/images/bottle.png');
+        $(bottle).addClass('bottle');
 
-        ring = document.createElement('img')
-        $(ring).attr('src', 'static/images/ring.png')
-        $(ring).addClass('ring')
+        ring = document.createElement('img');
+        $(ring).attr('src', 'static/images/ring.png');
+        $(ring).addClass('ring');
 
-        display = document.createElement('div')
-        $(display).attr('class', 'col-sm-4 col-md-4 col-lg-4')
-        $(display).addClass('sensor')
-        $(display).attr('id',id)
-        $(display).append(bottle)
-        $(display).append(ring)
+        display = document.createElement('div');
+        $(display).attr('class', 'col-sm-4 col-md-4 col-lg-4');
+        $(display).addClass('sensor');
+        $(display).attr('id',id);
+        $(display).append(bottle);
+        $(display).append(ring);
 
         return display
       }
@@ -76,32 +78,32 @@
         for(let x = 0; x < 9; x++){
           $('#game').append(sensor(`sensor-${x}`))
         }
-      })
+      });
 
       function point(points){
         $('.score-bottle').text(points)
       }
 
       function sensorOn(id) {
-        scoreBottle++
-        point(scoreBottle)
+        scoreBottle++;
+        point(scoreBottle);
         $(id).addClass('sensor-on')
       }
 
       function sensorOff(id) {
-        scoreBottle--
-        point(scoreBottle)
-        console.log(scoreBottle)
+        scoreBottle--;
+        point(scoreBottle);
+        console.log(scoreBottle);
         $(id).removeClass('sensor-on')
       }
 
       setTimeout(function(){
         sensorOn('#sensor-5')
-      }, 1000)
+      }, 1000);
 
       setTimeout(function(){
         sensorOff('#sensor-5')
-      }, 3000)
+      }, 1000)
 
       // const socket = io();
       // socket.on('connect', function() {

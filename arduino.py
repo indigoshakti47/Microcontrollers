@@ -27,11 +27,12 @@ while True:
     # vienen de la forma 'X-X-X-X-X-X-...X' donde X
     # simboliza los bits producidos por cada uno de los sensores
     rawString = str(arduino.readline(), 'utf-8').replace("\n", "")
+
     if rawString is not None:
-        output.append(int(rawString.split("-")[0].replace("\r", "")))
+        output.append(int(rawString.split("-")[3].replace("\r", "")))
         counter += 1
 
-    if counter == 9:
+    if counter == 8:
         if output_backup != output:
             # si rawString ha cambiado de su posicion anterior,
             # se entra a esta parte de codigo, se imprime en

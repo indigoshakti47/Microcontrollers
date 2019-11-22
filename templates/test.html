@@ -25,25 +25,20 @@
     <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div>
-
-</div>
-
-    <!--SENSOR 1 -->
+ <!--SENSOR 1 -->
 
     <div class="col-sm">
       <div class="card">
         <div class="card-body">
           <div class="row">
             <div class="col-6">
-              <div style="line-height:20px;">
+              <div style="line-height:100%;">
                 <a class="card-subtitle text-muted">RING</a>
                 <br>
-                <h5 class="card-title trend-title"></h5>
               </div>
             </div>
             <div class="col-6 mt-2">
-              <div id="estadoInfrarojo1" class="mt-2 alert-success mb-0 text-center">
+              <div id="estadoInfrarojo1" class="mt-2 alert-success mb-0 text-center" style="line-height:200%;">
                 TOSS</div>
               </div>
             </div>
@@ -88,6 +83,8 @@
             <div id="game" class="row"><div class="col-sm-4 col-md-4 col-lg-4 sensor" id="sensor-0">
                 <img src="static/images/bottle.png" class="bottle">
                 <img src="static/images/ring.png" class="ring"></div>
+
+
              <div class="col-sm-4 col-md-4 col-lg-4 sensor" id="sensor-1">
                  <img src="static/images/bottle.png" class="bottle">
                  <img src="static/images/ring.png" class="ring">
@@ -134,13 +131,40 @@
           </div>
         </div>
 
-<P>All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.</P>
+<P>All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+   All work and no play makes Jack a dull boy.  All work and no play makes Jack a dull boy. All work and no play makes Jack a dull boy.
+
+</P>
+
 
       <script type="text/javascript" charset="utf-8">
 
+          var audio = new Audio('static/Music/circus-song.mp3');
+          audio.play();
+
+          alert('Hey sup bruh?');
 
 
-      scoreBottle = 0;
+
+      scoreBottle = 1;
       function sensor(id) {
 
         bottle = document.createElement('img');
@@ -167,24 +191,24 @@
       }
 
       function sensorOn(id) {
+
         scoreBottle++;
-        point(scoreBottle);
+        point(scoreBottle*7);
         $(id).addClass('sensor-on')
       }
 
       function sensorOff(id) {
         scoreBottle--;
-        point(scoreBottle);
-        console.log(scoreBottle);
+        point(scoreBottle*3);
         $(id).removeClass('sensor-on')
       }
 
       setTimeout(function(){
-        sensorOn('#sensor-5')
+        sensorOn('#sensor-3')
       }, 1000);
 
       setTimeout(function(){
-        sensorOff('#sensor-5')
+        sensorOff('#sensor-3')
       }, 3000)
     </script>
 
@@ -239,75 +263,75 @@
         dyn_functions['receive_void_0'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-0')
+                    sensorOff('#sensor-1')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-0')
-               }, 3000)
+                     sensorOn('#sensor-1')
+               }, 1000)
             }
         };
         dyn_functions['receive_void_1'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-1')
+                    sensorOff('#sensor-1')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-1')
-               }, 3000)
+                     sensorOn('#sensor-1')
+               }, 1000)
             }
 
         };
         dyn_functions['receive_void_2'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-2')
+                    sensorOff('#sensor-2')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-2')
-               }, 3000)
+                     sensorOn('#sensor-2')
+               }, 1000)
             }
         };
         dyn_functions['receive_void_3'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-3')
+                    sensorOff('#sensor-3')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-3')
-               }, 3000)
+                     sensorOn('#sensor-3')
+               }, 1000)
             }
 
         };
         dyn_functions['receive_void_4'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-4')
+                    sensorOff('#sensor-4')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-4')
-               }, 3000)
+                     sensorOn('#sensor-4')
+               }, 1000)
             }
         };
         dyn_functions['receive_void_5'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-5')
+                    sensorOff('#sensor-5')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-5')
-               }, 3000)
+                     sensorOn('#sensor-5')
+               }, 1000)
             }
         };
 
@@ -315,26 +339,26 @@
             console.log(msg_t);
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-6')
+                    sensorOff('#sensor-6')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-6')
-               }, 3000)
+                     sensorOn('#sensor-6')
+               }, 1000)
             }
 
         };
         dyn_functions['receive_void_7'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-7')
+                    sensorOff('#sensor-7')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-7')
-               }, 3000)
+                     sensorOn('#sensor-7')
+               }, 1000)
             }
 
 
@@ -344,28 +368,16 @@
         dyn_functions['receive_void_8'] = function (val) {
             if (val == "0") {
                 setTimeout(function(){
-                    sensorOn('#sensor-8')
+                    sensorOff('#sensor-8')
                 }, 1000)
             } else {
 
                setTimeout(function(){
-                     sensorOff('#sensor-8')
-               }, 3000)
+                     sensorOn('#sensor-8')
+               }, 1000)
             }
         };
 
-        dyn_functions['receive_void_9'] = function (val) {
-            if (val == "0") {
-                setTimeout(function(){
-                    sensorOn('#sensor-9')
-                }, 1000)
-            } else {
-
-               setTimeout(function(){
-                     sensorOff('#sensor-9')
-               }, 3000)
-            }
-        };
 
 
 
